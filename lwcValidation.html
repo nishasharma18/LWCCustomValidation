@@ -1,6 +1,6 @@
 <template>
-    <<lightning-input label="FirstName" onchange={handleFirstName}></lightning-input>
-    <lightning-input label="LastName" onchange={handleLastName}></lightning-input>
+    <lightning-input label="FirstName" onchange={handleFirstName} class="firstName" value={firstName}></lightning-input>
+    <lightning-input label="LastName" onchange={handleLastName} class="lastName" value={lastName}></lightning-input>
     <lightning-input label="CreditCardNumber" class="cardNumber" value={cardValue} max-length ="16" onchange={handleInputChange}></lightning-input>
     <lightning-combobox name="progress" label="CardType" value={value} placeholder="Card Type"
         options={options} disabled="true">
