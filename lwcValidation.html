@@ -1,0 +1,10 @@
+<template>
+    <lightning-input label="CardNumber" class="Card" maxlength="16"></lightning-input>
+    <lightning-input label="FirstName"></lightning-input>
+    <lightning-input label="LastName"></lightning-input>
+    <lightning-input label="CreditCardNumber" class="cardNumber" value={cardValue} max-length ="16" onchange={handleInputChange}></lightning-input>
+    <lightning-combobox name="progress" label="CardType" value={value} placeholder="Card Type"
+        options={options} onchange={handleChange} >
+   </lightning-combobox>
+    <lightning-button label="Submit" onclick={handleValidation}></lightning-button>
+</template>
