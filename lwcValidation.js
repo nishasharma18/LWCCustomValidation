@@ -4,7 +4,6 @@ export default class LwcValidation extends LightningElement {
     @track errors={
         "FirstName":"Please Enter the FirstName",
         "LastName":"Please Enter the LastName",
-        "CardNumber":"Please Enter a Valid Card Number",
         "CreditCardNumber":"Please Enter a Valid Card Number"
     };
 
@@ -65,24 +64,12 @@ export default class LwcValidation extends LightningElement {
     }
     
     handleValidation(){
-        //const CardRegex="^4[0-9]{12}(?:[0-9]{3})?$"; // work with first digit starts with 4
-        const CardRegex = "^(?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})$";
-
         this.template.querySelectorAll("lightning-input").forEach(item => {
             let val = item.value;
             let label = item.label;
             if(val != "") {
                 item.setCustomValidity("");
-                if (label === 'CardNumber') { 
-                    if(val.match(CardRegex)){
-                        item.setCustomValidity("");
-                    }else{
-                        item.setCustomValidity(this.errors[label]);
-                    }
-                }
             } else {
-                this.value ='cardType';
-                this.template.querySelector('.cardNumber').maxLength = 16;
                 item.setCustomValidity(this.errors[label]);
             }
             item.reportValidity();
