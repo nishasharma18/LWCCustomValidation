@@ -9,6 +9,8 @@ export default class LwcValidation extends LightningElement {
 
     @track value = 'cardType';
     @track cardValue;
+    @track firstName;
+    @track lastName;
 
     get options() {
         return [
@@ -35,6 +37,7 @@ export default class LwcValidation extends LightningElement {
             this.template.querySelector('.cardNumber').maxLength = 19;
         }
 
+        let cardNumber = this.template.querySelector(".cardNumber");
         var visaRegEx = "^4[0-9]{12}(?:[0-9]{3})?$";
         var mastercardRegEx = "^5[1-5][0-9]{14}$";
         var amexpRegEx = "^3[47][0-9]{13}$";
@@ -42,25 +45,35 @@ export default class LwcValidation extends LightningElement {
         let cardValueNew = this.cardValue.split("-").join(""); 
         if (cardValueNew.match(visaRegEx)) {
             this.value = 'visa';
+            cardNumber.setCustomValidity("");
         } else if(cardValueNew.match(mastercardRegEx)) {
             this.value = 'masterCard';
+            cardNumber.setCustomValidity("");
         } else if(cardValueNew.match(amexpRegEx)) {
             this.value = 'americanExpress';
+            cardNumber.setCustomValidity("");
         } else if(cardValueNew.match(discovRegEx)) {
             this.value = 'discover';
+            cardNumber.setCustomValidity("");
         } else {
             this.value ='cardType';
+            cardNumber.setCustomValidity("Please Enter a Valid Card Number");
         }
+        cardNumber.reportValidity();
     }
     
-    handleChange(event) {
-        this.value = event.detail.value;
-    
-        if (this.value == 'visa' || this.value == 'masterCard' || this.value == 'discover' || this.value == 'cardType') {
-            this.template.querySelector('.cardNumber').maxLength = 19;
-        } else {
-            this.template.querySelector('.cardNumber').maxLength = 18;
-        } 
+    handleFirstName(event){
+        this.firstName = event.detail.value;
+        let firstName = this.template.querySelector(".firstName");
+        firstName.setCustomValidity("");
+        firstName.reportValidity();
+    }
+
+    handleLastName(event){
+        this.lastName = event.detail.value;
+        let firstName = this.template.querySelector(".lastName");
+        firstName.setCustomValidity("");
+        firstName.reportValidity();
     }
     
     handleValidation(){
